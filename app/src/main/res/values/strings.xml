@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Task3OnGraph</string>
+    
+    <string-array name="pronouns">
+        <item>Mr.</item>
+        <item>Mrs.</item>
+        <item>They</item>
+        <item>Them</item>
+    </string-array>
+</resources>
