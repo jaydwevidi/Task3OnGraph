@@ -2,10 +2,11 @@ package com.example.task3ongraph
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.example.task3ongraph.databinding.ActivityMainBinding
 import java.util.*
 
@@ -25,12 +26,11 @@ class MainActivity : AppCompatActivity() {
         setupSpinnerEntriesProgramatically()
 
 
-
-
-
     }
 
-    fun setupTimePickerListner(){
+
+
+    private fun setupTimePickerListner(){
         timePickerListner = object : TimePickerDialog.OnTimeSetListener {
             override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
                 Toast.makeText(this@MainActivity, " time = $p1:$p2", Toast.LENGTH_SHORT).show()
@@ -38,12 +38,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showTimePicker(){
+    private fun showTimePicker(){
         val timePicker = TimePickerDialog(this , timePickerListner ,  0 , 0 , false)
         timePicker.show()
     }
 
-    fun setupDatePickerListner(){
+    private fun setupDatePickerListner(){
         datepickerListner = object  : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
                 Toast.makeText(this@MainActivity, "$p1 $p2 $p3", Toast.LENGTH_SHORT).show()
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         //datepickerListner = DatePickerDialog.OnDateSetListener { p0, p1, p2, p3 -> TODO("Not yet implemented") }
     }
 
-    fun showDatePicker(){
+    private fun showDatePicker(){
         val datePickerDialog = DatePickerDialog(
             this,
             datepickerListner,
@@ -62,7 +62,8 @@ class MainActivity : AppCompatActivity() {
         )
         datePickerDialog.show()
     }
-    fun getGender() : String {
+
+    private fun getGender() : String {
         lateinit var selectedGender : String
         val genderID = binding.rgGender.checkedRadioButtonId
 
@@ -77,24 +78,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun submit(view: View){
-
-
+        binding.checkboxAge.isChecked
+        startActivity(Intent(applicationContext , HomeActivity::class.java))
     }
 
-    fun setupAutocompleteTV(){
+    private fun setupAutocompleteTV(){
 
         val language = arrayOf("C", "C++", "Java", ".NET", "iPhone", "Android", "ASP.NET", "PHP")
         val languageAdapter = ArrayAdapter(this, android.R.layout.select_dialog_item, language)
         binding.autoCompleteTVLanguages.setAdapter(languageAdapter)
     }
 
-    fun setupSpinnerEntriesProgramatically(){
+    private fun setupSpinnerEntriesProgramatically(){
         val pronouns = ArrayAdapter.createFromResource(this , R.array.pronouns, android.R.layout.simple_spinner_item)
         pronouns.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.pronoun.adapter = pronouns
     }
 
-    fun setupSpinnerClickListner(){
+    private fun setupSpinnerClickListner(){
 
         binding.pronoun.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 

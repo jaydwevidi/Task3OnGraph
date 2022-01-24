@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jayra/AndroidStudioProjects/Task3OnGraph/app/src/main/res/layout/activity_home.xml" value="0.4" />
         <entry key="..\:/Users/jayra/AndroidStudioProjects/Task3OnGraph/app/src/main/res/layout/activity_main.xml" value="0.44000000000000006" />
+        <entry key="..\:/Users/jayra/AndroidStudioProjects/Task3OnGraph/app/src/main/res/layout/custom_image_slider_layout_item.xml" value="0.21875" />
+        <entry key="..\:/Users/jayra/AndroidStudioProjects/Task3OnGraph/app/src/main/res/layout/rv_item.xml" value="0.21450459652706844" />
+        <entry key="..\:/Users/jayra/AndroidStudioProjects/Task3OnGraph/app/src/main/res/layout/slide_item.xml" value="0.21875" />
       </map>
     </option>
   </component>
