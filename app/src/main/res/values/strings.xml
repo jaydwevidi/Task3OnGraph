@@ -4,6 +4,6 @@
     <string-array name="pronouns">
         <item>Mr.</item>
         <item>Mrs.</item>
-        <item>Other</item>
+        <item>Dr.</item>
     </string-array>
 </resources>

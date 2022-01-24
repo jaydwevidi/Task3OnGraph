@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.task3ongraph.databinding.ActivityHomeBinding
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
+import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 
 class HomeActivity : AppCompatActivity() {
@@ -14,16 +16,32 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupRV()
         setupSlider()
+
+        supportActionBar?.title = "Home Activity"
+
+        binding.userDetails.text = intent.getStringExtra("user")
     }
     fun getRandomList() : List<String> {
         val list = mutableListOf<String>()
         list.add("dfa dfasdfa")
+        list.add("dfa dfasdfdsfa")
+        list.add("dfa dfasdfdsfa")
+        list.add("dfa dfasdfdsfa")
+        list.add("dfa dfasdfdsfa")
+        list.add("dfa dfasdfdsfa")
+        list.add("dfa dfasdfdsfa")
+        list.add("dfa dfasdfdsfa")
+        list.add("dfa dfasdfdsfa")
+        list.add("dfa dfasdfdsfa")
+        list.add("dfa dfasdfdsfa")
+        list.add("dfa dfasdfdsfa")
         list.add("dfa dfasdfdsfa")
         list.add("dfa dfasdfa")
         list.add("dfa dfasdfa")
         list.add("dfa dfasdfa")
         return list
     }
+
     fun setupRV() {
         binding.homeRV.apply {
             adapter = MyRvAdapter(getRandomList())
@@ -39,8 +57,11 @@ class HomeActivity : AppCompatActivity() {
         list.add("https://wallpapercave.com/wp/wp4676567.jpg")
         list.add("https://people.sc.fsu.edu/~jburkardt/data/jpg/auburn_logo.jpg")
 
-        binding.sliderView.setSliderAdapter(
-            SlideAdapter(list , context =  applicationContext )
-        )
+        binding.sliderView.apply {
+            scrollTimeInSec = 2
+            setSliderAdapter(SlideAdapter(list , context =  applicationContext ))
+            setIndicatorAnimation(IndicatorAnimationType.WORM)
+            startAutoCycle()
+        }
     }
 }

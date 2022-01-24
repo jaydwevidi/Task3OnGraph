@@ -18,7 +18,7 @@ class MyRvAdapter(val dataset : List<String>) : RecyclerView.Adapter<MyRvAdapter
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.text1.text = dataset[position]
+        holder.text1.text = "" + position + " " + dataset[position]
     }
 
     override fun getItemCount() = dataset.size

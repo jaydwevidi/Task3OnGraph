@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
+        android:layout_marginVertical="10dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:paddingHorizontal="15dp"
-        android:paddingVertical="30dp"
         tools:context=".MainActivity"
         android:orientation="vertical">
 
@@ -26,6 +26,7 @@
 
 
         <EditText
+            android:id="@+id/etNameFull"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Full Name"
@@ -38,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="15dp"
-        android:hint="Select language of Choice"
+        android:hint="Select language (Kotlin / Java)"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -66,13 +67,35 @@
                 android:layout_height="wrap_content"
                 android:text="Female" />
         </RadioGroup>
-
+        <Button
+            android:id="@+id/buttonDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="set date"
+            android:layout_margin="10dp"
+            />
+        <Button
+            android:id="@+id/buttonTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="set time"
+            android:layout_margin="10dp"
+            />
         <CheckBox
             android:id="@+id/checkboxAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Are you above 18 years old ?"
             android:layout_marginVertical="15dp"
+            />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="200dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:scaleY="4"
+            style="?android:attr/progressBarStyleHorizontal"
             />
 
         <Button
@@ -81,6 +104,7 @@
             android:layout_height="wrap_content"
             android:onClick="submit"
             android:text="Submit"
+            android:layout_margin="20dp"
             android:layout_gravity="center"
             />
 

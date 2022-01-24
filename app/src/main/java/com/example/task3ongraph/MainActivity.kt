@@ -1,9 +1,11 @@
 package com.example.task3ongraph
 
+import android.animation.ObjectAnimator
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -23,17 +25,25 @@ class MainActivity : AppCompatActivity() {
 
         setupAutocompleteTV()
         setupSpinnerClickListner()
-        setupSpinnerEntriesProgramatically()
+        setupSpinnerEntriesProgrammatically()
+        setupDatePickerListner()
+        setupTimePickerListner()
+
+        binding.buttonDate.setOnClickListener {
+            showDatePicker()
+        }
+        binding.buttonTime.setOnClickListener {
+            showTimePicker()
+        }
 
 
     }
 
-
-
     private fun setupTimePickerListner(){
         timePickerListner = object : TimePickerDialog.OnTimeSetListener {
-            override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
-                Toast.makeText(this@MainActivity, " time = $p1:$p2", Toast.LENGTH_SHORT).show()
+            override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
+                //Toast.makeText(this@MainActivity, " time = $p1:$p2", Toast.LENGTH_SHORT).show()
+                binding.buttonTime.text = "$hour:$minute"
             }
         }
     }
@@ -45,8 +55,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupDatePickerListner(){
         datepickerListner = object  : DatePickerDialog.OnDateSetListener {
-            override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-                Toast.makeText(this@MainActivity, "$p1 $p2 $p3", Toast.LENGTH_SHORT).show()
+            override fun onDateSet(p0: DatePicker?, year: Int, month: Int, date: Int) {
+                //Toast.makeText(this@MainActivity, "$year ${month+1} $date", Toast.LENGTH_SHORT).show()
+                binding.buttonDate.text = "$date-${month+1}-$year"
             }
         }
         //datepickerListner = DatePickerDialog.OnDateSetListener { p0, p1, p2, p3 -> TODO("Not yet implemented") }
@@ -78,18 +89,46 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun submit(view: View){
-        binding.checkboxAge.isChecked
-        startActivity(Intent(applicationContext , HomeActivity::class.java))
+
+        val languageSelected : String = binding.autoCompleteTVLanguages.text.toString()
+        val pronoun = pronounText
+        val name = binding.etNameFull.text
+
+        val fullString = "$pronoun $name \n" +
+                "language = $languageSelected ," +
+                " date = ${binding.buttonDate.text}"
+
+        if(!binding.checkboxAge.isChecked) {
+            Toast.makeText(view.context, "Only adults allowed", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        binding.progressBar.max = 1000
+        ObjectAnimator.ofInt(binding.progressBar , "progress" , 990 )
+            .setDuration(2000)
+            .start()
+
+        val timer = object: CountDownTimer(2000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {}
+
+            override fun onFinish() {
+                val intent = Intent(applicationContext , HomeActivity::class.java)
+                intent.putExtra("user" , fullString)
+                startActivity(intent)
+            }
+        }
+        timer.start()
+
     }
 
     private fun setupAutocompleteTV(){
 
-        val language = arrayOf("C", "C++", "Java", ".NET", "iPhone", "Android", "ASP.NET", "PHP")
+        val language = arrayOf("C", "Kotlin" , "C++", "Java", ".NET", "iPhone", "Android", "ASP.NET", "PHP")
         val languageAdapter = ArrayAdapter(this, android.R.layout.select_dialog_item, language)
         binding.autoCompleteTVLanguages.setAdapter(languageAdapter)
     }
 
-    private fun setupSpinnerEntriesProgramatically(){
+    private fun setupSpinnerEntriesProgrammatically(){
         val pronouns = ArrayAdapter.createFromResource(this , R.array.pronouns, android.R.layout.simple_spinner_item)
         pronouns.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.pronoun.adapter = pronouns
@@ -100,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         binding.pronoun.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                Toast.makeText(this@MainActivity, p0?.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@MainActivity, p0?.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show()
                 pronounText = p0?.getItemAtPosition(position).toString()
             }
 
